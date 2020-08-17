@@ -19,3 +19,4 @@ set nowrap                    " disable word wrap
 nnoremap ,GPL :r ~/.vim/snippets/gpl.sh<Return>
 nnoremap Q gqip
 nnoremap S :split<Return>
+map <C-n> :NERDTreeToggle<CR>
