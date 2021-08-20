@@ -76,4 +76,18 @@ function makezip() { zip -r "${1%%/}.zip" "$1" ; }
 # Make your directories and files access rights sane.
 function sanitize() { chmod -R u=rwX,g=rX,o= "$@" ;}
 
+## 
+# gpg
+# gpg functions
+function secret () {
+        output=~/"${1}".$(date +%s).enc
+        gpg --encrypt --armor --output ${output} -r 0x9000000000000000 "${1}" && echo "${1} -> ${output}"
+}
+
+function reveal () {
+        output=$(echo "${1}" | rev | cut -c16- | rev)
+        gpg --decrypt --output ${output} "${1}" && echo "${1} -> ${output}"
+}      
+
+
 # syntax:bash
