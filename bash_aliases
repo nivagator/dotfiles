@@ -1,19 +1,97 @@
-alias update='sudo apt update -qq && sudo apt upgrade -y'
+##
+# clear terminal
+alias cls='clear'
+alias ":q"="exit"
 alias c='clear'
-alias now='date +"%Y-%m-%d %T"'
-alias cn='cat -n'
-alias hist='history | tail -40'
-alias install='sudo apt install -y'
-alias myip='ip -br -c a'
-alias motd='sudo update-motd'
-alias process='ps -aux'
+
+##
+# Reaload bashrc
+alias rl='cls && . ~/.bashrc'
+
+##
+# Shortcuts to edit startup files
+alias vim="vim "
+alias vi="vim "
+alias vali="vim ~/.bash/.alias"
+alias vbrc="vim ~/.bashrc"
+alias vbpf="vim ~/.bash_profile"
+alias vpol="vim ~/.config/polybar/config"
+
+##
+# The 'ls' family
+alias ll="ls -lnAh --group-directories-first"
+alias ls="ls -h --color"    # add colors for filetype recognition
+alias la="ls -A --color"    # show hidden files
+
+##
+# grep
+alias grep="grep --color=auto"
+alias hist='history | grep'
+alias histy='history | tail -40'
+
+##
+# newsboat
+alias newsboat='newsboat -u $HOME/SynologyDrive/.newsboat/urls -c $HOME/SynologyDrive/.newsboat/cache.db -C $HOME/SynologyDrive/.newsboat/config'
+
+##
+# pacman 
+alias pacman='sudo pacman --color auto'
+# using fzf to browse all installed packages in a split pane view (very useful)
+alias installed="pacman -Qq | fzf --preview 'pacman -Qil {}' --layout=reverse --bind 'enter:execute(pacman -Qil {} | less)'"
+# save two lists of installed packages, those from arch repos and those from the AUR
+alias savepkgs="sudo pacman -Qqen > $HOME/pkgs-arch-ABS.txt && sudo pacman -Qqem > $HOME/pkgs-arch-AUR.txt"
+
+##
+# debian|ubuntu|pop
+# alias update='sudo apt update -qq && sudo apt upgrade -y'
+# alias install='sudo apt install -y'
+
+##
+# youtube-dl
+# Ease-of-use youtube-dl aliases; these save typing!
+if type -fP youtube-dl > /dev/null 2>&1; then
+	alias ytdlv="youtube-dl -c --yes-playlist --sleep-interval 5 --format best --no-call-home --console-title --quiet --ignore-errors" #: Download HQ videos from YouTube, using youtube-dl.
+	alias ytdla="youtube-dl -cx --yes-playlist --audio-format mp3 --sleep-interval 5 --max-sleep-interval 5 --no-call-home --console-title --quiet --ignore-errors" #: Download HQ audio from YouTube, using youtube-dl.
+	alias ytpla="youtube-dl -cix --audio-format mp3 --sleep-interval 5 --yes-playlist --no-call-home --console-title --quiet --ignore-errors" #: Download HQ videos from YouTube playlist, using youtube-dl.
+	alias ytplv="youtube-dl -ci --yes-playlist --sleep-interval 5 --format best --no-call-home --console-title --quiet --ignore-errors" #: Download HQ audio from YouTube playlist, using youtube-dl.
+fi
+
+##
+# print XDG variables
+alias xdgexport='export -p | grep XDG'
+
+##
+# cli infos
+alias neofetch="cls && neofetch --ascii_distro arch --color_blocks off --bar_char '─' '─' --bar_length 7 --bold on -shell_version on --cpu_cores logical --cpu_brand on --cpu_speed on --cpu_temp C --cpu_display barinfo --memory_percent on --memory_display barinfo --disk_display barinfo"
+alias nf="cls && neofetch --ascii_distro arch --color_blocks off --bar_char '─' '─' --bar_length 7 --bold on -shell_version on --cpu_cores logical --cpu_brand on --cpu_speed on --cpu_temp C --cpu_display barinfo --memory_percent on --memory_display barinfo --disk_display barinfo"
+alias al='cls && alsi -l'
+alias alsi='cls && alsi'
 alias mem='free -h'
-alias sstatus='sudo systemctl status'
-alias srestart='sudo systemctl restart'
-alias kill='sudo pkill'
 alias cpu='lscpu'
-alias disk='df -h'
 alias os='cat /etc/os-release'
+
+##
+# Local / Public IP
+alias mypip="curl ipecho.net/plain; echo"
+alias mylip="ifconfig | sed -En 's/127.0.0.1//;s/.*inet (addr:)?(([0-9]*\.){3}[0-9]*).*/\2/p'"
+alias mynet="lspci -knn|grep -iA2 net"
+alias mynethw='hwinfo --netcard --wlan --bluetooth | grep -Ei "model\:|driver\:|status\:|cmd\:|file\:|detected\:" | grep -v "Config Status"'
+
+##
+# Misc utilities
+alias du="du -kh"
+alias df="df -kTh"
+alias diskchk="lsblk -d -e 7 -o name,rota,disc-max,model,ptuuid"
+alias listusb='lsblk -p -S -o name,tran,rm | grep "usb" | cut -d " " -f1'
+
+##
+# audio
+alias aloopback="pactl load-module module-loopback"
+alias rloopback="pactl unload-module module-loopback"
+# three ways to get audio output devices
+alias alsadev="LANG=C pactl list | grep -A2 'Source #' | grep 'Name: ' | cut -d' ' -f2"
+alias pulsedev="pacmd list-sources | grep -e 'index:' -e device.string -e 'name:'"
+alias listsinks="pacmd list-sinks | grep -e 'name:' -e 'index:'"
 
 ## Jekyll
 # alias jek='bundle exec jekyll serve --host 0.0.0.0'
@@ -21,24 +99,21 @@ alias os='cat /etc/os-release'
 ## Django
 # alias pymg='python manage.py'
 
-## asciiquarium - for fun
-# alias asciiquarium='/usr/local/bin/asciiquarium'
-
 ## python3 alias 
 # alias python='/usr/bin/python3'
 
-alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
+##
+# CD & List
+cd() {
+  builtin cd "$@" && ls
+}
 
-# enable color support of ls and also add handy aliases
-if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls --color=auto'
-    #alias dir='dir --color=auto'
-    #alias vdir='vdir --color=auto'
-
-    alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
+##
+# A more descriptive, yet concise lsblk; you'll miss it when it's gone.
+if [ -x /bin/lsblk ]; then
+	alias lsblkid='\
+		/bin/lsblk -o name,label,fstype,size,uuid,mountpoint --noheadings
+	'
 fi
+
+# syntax:bash
