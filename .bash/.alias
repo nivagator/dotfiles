@@ -1,3 +1,7 @@
+#
+# ~/.bash/.alias
+#
+
 ##
 # clear terminal
 alias cls='clear'
