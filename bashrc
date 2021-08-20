@@ -110,4 +110,4 @@ export PATH="$HOME/gems/bin:$PATH"
 . $HOME/.bash/.func
 . $HOME/.bash/.alias
 # . $HOME/.bash/.colors
-# . $HOME/.bash/.prompt3
+. $HOME/.bash/.prompt
