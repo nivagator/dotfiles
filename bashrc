@@ -110,13 +110,13 @@ stty -ctlecho           # turn off control character echoing
 # fi
 # unset color_prompt force_color_prompt
 
-
-# load alias definitions
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
-fi
-
 # Install Ruby Gems to ~/gems
 export GEM_HOME="$HOME/gems"
 export PATH="$HOME/gems/bin:$PATH"
 
+# Add custom enviroment
+# . $HOME/.bash/.export
+# . $HOME/.bash/.func
+. $HOME/.bash/.alias
+# . $HOME/.bash/.colors
+# . $HOME/.bash/.prompt3
