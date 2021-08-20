@@ -22,6 +22,10 @@ alias vbpf="vim ~/.bash_profile"
 alias vpol="vim ~/.config/polybar/config"
 
 ##
+# open 
+alias open='xdg-open'
+
+##
 # The 'ls' family
 alias ll="ls -lnAh --group-directories-first"
 alias ls="ls -h --color"    # add colors for filetype recognition
