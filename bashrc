@@ -107,7 +107,7 @@ export PATH="$HOME/gems/bin:$PATH"
 
 # Add custom enviroment
 . $HOME/.bash/.export
-# . $HOME/.bash/.func
+. $HOME/.bash/.func
 . $HOME/.bash/.alias
 # . $HOME/.bash/.colors
 # . $HOME/.bash/.prompt3

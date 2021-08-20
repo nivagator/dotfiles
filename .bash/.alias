@@ -107,12 +107,6 @@ alias listsinks="pacmd list-sinks | grep -e 'name:' -e 'index:'"
 # alias python='/usr/bin/python3'
 
 ##
-# CD & List
-cd() {
-  builtin cd "$@" && ls
-}
-
-##
 # A more descriptive, yet concise lsblk; you'll miss it when it's gone.
 if [ -x /bin/lsblk ]; then
 	alias lsblkid='\
