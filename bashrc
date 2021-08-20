@@ -115,7 +115,7 @@ export GEM_HOME="$HOME/gems"
 export PATH="$HOME/gems/bin:$PATH"
 
 # Add custom enviroment
-# . $HOME/.bash/.export
+. $HOME/.bash/.export
 # . $HOME/.bash/.func
 . $HOME/.bash/.alias
 # . $HOME/.bash/.colors
