@@ -63,12 +63,6 @@ shopt -s cdspell 2> /dev/null
 # Ex: CDPATH=".:~:~/projects" will look for targets in the current working directory, in home and in the ~/projects folder
 CDPATH="."
 
-# Examples:
-# export dotfiles="$HOME/dotfiles"
-export dev="$HOME/dev"
-# export documents="$HOME/Documents"
-export synology="$HOME/SynologyDrive"
-
 # Use bash-completion, if available
 [[ $PS1 && -f /usr/share/bash-completion/bash_completion ]] && \
     . /usr/share/bash-completion/bash_completion
@@ -86,9 +80,6 @@ esac
 
 ulimit -S -c 0          # disable core dumps
 stty -ctlecho           # turn off control character echoing
-
-
-
 
 # # make less more friendly for non-text input files, see lesspipe(1)
 # [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"

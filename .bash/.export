@@ -1,6 +1,16 @@
+#
+# ~/.bash/.export
+#
+
 ##
 # Set the terminal for colors.
 export TERM=xterm-256color
+
+# Examples:
+# export dotfiles="$HOME/dotfiles"
+export dev="$HOME/dev"
+# export documents="$HOME/Documents"
+export synology="$HOME/SynologyDrive"
 
 ##
 export XDG_CONFIG_HOME=$HOME/.config
